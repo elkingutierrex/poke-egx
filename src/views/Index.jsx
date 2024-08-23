@@ -1,4 +1,4 @@
-import { Container, Row, Col, InputGroup, InputGroupText, Input } from "reactstrap";
+import { Container, Row, Col, InputGroup, InputGroupText, Input, CardImg, CardHeader } from "reactstrap";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { PokeCard } from "../components/PokeCard";
@@ -61,6 +61,7 @@ export const Index = () => {
 
   return (
     <>
+    
       <Container className="shadow bg-danger mt-3 mb-3 p-2">
         <Row>
           <Col>

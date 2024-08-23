@@ -48,7 +48,7 @@ export const PokeCard = ( params ) => {
             </CardBody>
 
             <CardFooter className="bg-warning">
-              <Link className="btn btn-dark btn-sm"
+              <Link className="btn btn-dark d-grid btn-sm "
                     to={'/pokemon/'+pokemon.name}>
                 <i className="fa-solid fa-arrow-up-right-from-square"> </i> Detalle 
               </Link>

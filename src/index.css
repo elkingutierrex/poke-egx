@@ -1,0 +1,13 @@
+.w-image{
+    width: 100px;
+    border-radius: 20px ;
+}
+.navbar{
+    padding: 10px 50px;
+    background-color: black;
+    color: white;
+    border-radius: 10px;
+    font-family: fantasy;
+    opacity:70%;
+    position: fixed absolute;
+}
