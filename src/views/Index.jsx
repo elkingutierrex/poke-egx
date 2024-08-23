@@ -2,31 +2,37 @@ import { Container, Row, Col, InputGroup, InputGroupText, Input } from "reactstr
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { PokeCard } from "../components/PokeCard";
+import { PaginationControl } from "react-bootstrap-pagination-control";
+
 
 export const Index = () => {
+  const [ itemsPerPage, setItemsPerPage]  = useState(8)
   const [ pokemons, setPokemons ]         = useState([]);
   const [ allPokemons, setAllPokemons ]   = useState([]);
   const [ list, setList ]                 = useState([]);
   const [ filter, setFilter ]             = useState('');
   const [ offSet, setOffset ]             = useState(0);
-  const [ limit, setLimit ]               = useState(20);
+  const [ limit, setLimit ]               = useState(itemsPerPage);
+  const [ total, setTotal ]               = useState(itemsPerPage);
 
   useEffect(() => {
     getPokemons(offSet);
     getAllPokemons();
-  }, [offSet]); // Puedes agregar `offSet` como dependencia si esperas que cambie
-
+  }, []);
+  
   const getPokemons = async (startNumber) => {
-    const url = `https://pokeapi.co/api/v2/pokemon?limit=${limit}&offset=${offSet}`;
+    const url = `https://pokeapi.co/api/v2/pokemon?limit=${limit}&offset=${startNumber}`;
     axios.get(url).then(async (response) => {
       const resp = response.data.results;
+      setTotal(response.data.count);
       setPokemons(resp);
       setList(resp);
+    
       console.log(resp);
     });
   };
 
-  const getAllPokemons = async (startNumber) => {
+  const getAllPokemons = async () => {
     const url = `https://pokeapi.co/api/v2/pokemon?limit=1000000&offset=0`;
     axios.get(url).then(async (response) => {
       const resp = response.data.results;
@@ -43,6 +49,14 @@ export const Index = () => {
         setList(filter.trim() !== ''? allPokemons.filter(pokemon => pokemon.name.includes(filter)) : pokemons);
       },300)
     }
+  }
+
+  const goPage  = async(page) =>{
+    setList([]);
+    const x = ( (page == 1 )? 0 : ((page-1)*itemsPerPage));
+    console.log( x, page );
+    await getPokemons( x );
+    setOffset(page)
   }
 
   return (
@@ -69,6 +83,16 @@ export const Index = () => {
        
             )
           )}
+      
+      { offSet }
+          <PaginationControl last={true} 
+                             limit={limit} 
+                             total={total} 
+                             page={offSet} 
+                             changePage={p => goPage(p)}/>
+
+
+
         </Row>
       </Container>
     </>
