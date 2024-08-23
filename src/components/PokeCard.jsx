@@ -1,13 +1,15 @@
 import axios from "axios";
 import { useEffect, useState } from "react"
 import { Link } from "react-router-dom";
-import { Col, Card, CardBody, CardFooter, CardImg, Badge } from "reactstrap" 
+import { Col, Card, CardBody, CardFooter, CardImg, Badge } from "reactstrap";
+import { useTranslation } from "react-i18next"
 
 export const PokeCard = ( params ) => {
   const [ pokemon, setPokemon ] = useState([]);
   const [ imagen, setImagen ] = useState('');
   const [ cardClass, setCardClass ] = useState('d-none');
   const [ loadClass, setLoadClass ] = useState('');
+  const [ t, i18n ] = useTranslation("global");
 
   useEffect(()=>{
     getPokemon()
@@ -50,13 +52,14 @@ export const PokeCard = ( params ) => {
             <CardFooter className="bg-warning">
               <Link className="btn btn-dark d-grid btn-sm "
                     to={'/pokemon/'+pokemon.name}>
-                <i className="fa-solid fa-arrow-up-right-from-square"> </i> Detalle 
+                <i className="fa-solid fa-arrow-up-right-from-square"> </i> {t("txt.detail")} 
               </Link>
             </CardFooter>
 
           
         </Card>
-      </Col>
+   
+    </Col>
       
     </>
   )

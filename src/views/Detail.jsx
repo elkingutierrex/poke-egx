@@ -1,8 +1,8 @@
-import { Container,  Row, Col, Card, CardBody, CardText, Badge, Progress } from "reactstrap";
+import { Container,  Row, Col, Card, CardBody, CardText} from "reactstrap";
 import axios from "axios";
-import { PokeCard } from "../components/PokeCard";
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 export const Detail = () => {
   const {id} = useParams();
@@ -14,10 +14,12 @@ export const Detail = () => {
   const [ cardClass, setCardClass ] = useState('d-none');
   const [ loadClass, setLoadClass ] = useState('');
   const [ imagen, setImagen ] = useState('');
-
+  const [ t, i18n ] = useTranslation("global");
 
 
   const url = `https://pokeapi.co/api/v2/pokemon/${id}`;
+
+  
 
   useEffect(()=>{
     getPokemon()
@@ -104,7 +106,7 @@ export const Detail = () => {
               <Row>
                 <Col>
                 <Link to="/" className="btn btn-warning"> 
-                  <i className="fa-solid fa-home">Inicio</i>
+                  <i className="fa-solid fa-home">{t("txt.home")} </i>
                 </Link>
                 </Col>
               </Row>
@@ -119,8 +121,8 @@ export const Detail = () => {
                   <CardText className="h1 text-capitalize"> {pokemon.name} </CardText>
                   <CardText className="fs-3 text-capitalize"> {description} </CardText>
                   <CardText className="fs-5"> 
-                    Altura: <strong> {(pokemon.height)/10} m </strong>
-                    Peso: <strong> {(pokemon.weight)/10} kg</strong>
+                  {t("txt.height")}  <strong> {(pokemon.height)/10} m </strong>
+                  {t("txt.weight")} : <strong> {(pokemon.weight)/10} kg</strong>
                   </CardText>
                 
                   <CardText className="f5"> Habitat: <strong className="text-capitalize"> {habitat}</strong> </CardText>

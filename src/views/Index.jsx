@@ -3,6 +3,8 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import { PokeCard } from "../components/PokeCard";
 import { PaginationControl } from "react-bootstrap-pagination-control";
+import { useTranslation } from "react-i18next";
+
 
 
 export const Index = () => {
@@ -14,6 +16,9 @@ export const Index = () => {
   const [ offSet, setOffset ]             = useState(0);
   const [ limit, setLimit ]               = useState(itemsPerPage);
   const [ total, setTotal ]               = useState(itemsPerPage);
+  const { t, i18n } = useTranslation('global');
+
+
 
   useEffect(() => {
     getPokemons(offSet);
@@ -61,41 +66,43 @@ export const Index = () => {
 
   return (
     <>
-    
-      <Container className="shadow bg-danger mt-3 mb-3 p-2">
-        <Row>
-          <Col>
-            <InputGroup className="shadow">
-              <InputGroupText>
-                <i className="fa-solid fa-search"></i>
-              </InputGroupText>
-              <Input placeholder="Buscar Pokemon"
-                    value={filter}
-                    onChange={(e) => {setFilter(e.target.value)}}
-                    onKeyUpCapture={searchPokemon}></Input>
-            </InputGroup>
-          </Col>
-        </Row>
+     <button onClick={() => i18n.changeLanguage("es") }>ES</button>
+     <button onClick={() => i18n.changeLanguage("en")}>EN</button>
+        <Container className="shadow bg-danger mt-3 mb-3 p-2">
+          <Row>
+            <Col>
+              <InputGroup className="shadow">
+                <InputGroupText>
+                  <i className="fa-solid fa-search"></i>
+                </InputGroupText>
+                <Input placeholder="Buscar Pokemon"
+                      value={filter}
+                      onChange={(e) => {setFilter(e.target.value)}}
+                      onKeyUpCapture={searchPokemon}></Input>
+              </InputGroup>
+            </Col>
+          </Row>
 
-        <Row className="mt-3">
-          {
-            list.map((pokemon, i) => (
-              <PokeCard key={i} pokemon={pokemon} />
-       
-            )
-          )}
-      
-      { offSet }
-          <PaginationControl last={true} 
-                             limit={limit} 
-                             total={total} 
-                             page={offSet} 
-                             changePage={p => goPage(p)}/>
+          <Row className="mt-3">
+            {
+              list.map((pokemon, i) => (
+                <PokeCard key={i} pokemon={pokemon} />
+        
+              )
+            )}
+        
+        { offSet }
+            <PaginationControl last={true} 
+                              limit={limit} 
+                              total={total} 
+                              page={offSet} 
+                              changePage={p => goPage(p)}/>
 
 
 
-        </Row>
-      </Container>
+          </Row>
+        </Container>
+     
     </>
   );
 };
