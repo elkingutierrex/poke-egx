@@ -106,7 +106,7 @@ export const Detail = () => {
               <Row>
                 <Col>
                 <Link to="/" className="btn btn-warning"> 
-                  <i className="fa-solid fa-home">{t("txt.home")} </i>
+                  <i className="fa-solid fa-home"> {t("txt.home")} </i>
                 </Link>
                 </Col>
               </Row>

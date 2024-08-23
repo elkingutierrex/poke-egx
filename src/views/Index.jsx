@@ -66,8 +66,10 @@ export const Index = () => {
 
   return (
     <>
+    <div className="ar">
      <button onClick={() => i18n.changeLanguage("es") }>ES</button>
      <button onClick={() => i18n.changeLanguage("en")}>EN</button>
+    </div>
         <Container className="shadow bg-danger mt-3 mb-3 p-2">
           <Row>
             <Col>
@@ -90,8 +92,7 @@ export const Index = () => {
         
               )
             )}
-        
-        { offSet }
+
             <PaginationControl last={true} 
                               limit={limit} 
                               total={total} 
