@@ -122,17 +122,8 @@ export const Detail = () => {
                     Altura: <strong> {(pokemon.height)/10} m </strong>
                     Peso: <strong> {(pokemon.weight)/10} kg</strong>
                   </CardText>
-                  {/* <CardText className="f5"> Tipo: 
-                    { types.map( (type, i ) => {        
-                      <Badge pill className="me-1" color="danger" key={i}>
-                        {type}
-                      </Badge>
-                      }) 
-                    }
-                    
-                  </CardText> */}
+                
                   <CardText className="f5"> Habitat: <strong className="text-capitalize"> {habitat}</strong> </CardText>
-                  {/* <CardText className="f5"> Especie: {species} </CardText> */}
                  
                 </Col>
                 <Col md="6">
